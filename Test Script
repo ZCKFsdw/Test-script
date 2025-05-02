@@ -1,7 +1,7 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("iTz_48-Sultan", "GrapeTheme")
+local Window = Library.CreateLib("كلزق", "GrapeTheme")
 local Tab = Window:NewTab("Main ")
-local Section = Tab:NewSection("سكربت تجريبي ")
+local Section = Tab:NewSection("شاليه محمد ")
 
 Section:NewButton("شغل هاذا اول ", "", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script"))()
@@ -167,7 +167,7 @@ end)
 local Tab = Window:NewTab("oThers")
 local Section = Tab:NewSection("Other Games")
 
-Section:NewButton("Fling All (Wont S`top) ", "", function()
+Section:NewButton("Fling All (Wont Stop!!!) ", "", function()
     --actually for doll house but, its the same one the prison skids use
 
 wait() if not game:IsLoaded() then game.Loaded:Wait() end
@@ -303,4 +303,166 @@ coroutine.resume(coroutine.create(function()
         end)
     end
 end))
+end)
+
+Section:NewButton("Executer Any Script) ", "", function()
+    -- Crear la GUI y los elementos principales
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local ExecuteButton = Instance.new("TextButton")
+local ScriptBox = Instance.new("TextBox")
+local CloseButton = Instance.new("TextButton")
+local TitleLabel = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local UIStroke = Instance.new("UIStroke")
+local TweenService = game:GetService("TweenService")
+
+-- Propiedades de ScreenGui
+ScreenGui.Name = "FancyExecutor"
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+
+-- Propiedades iniciales de MainFrame (pequeño para la animación)
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+MainFrame.Size = UDim2.new(0, 0, 0, 0)
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0) -- Centramos inicialmente
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.ClipsDescendants = true
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+-- Agregar bordes redondeados al MainFrame
+UICorner.Parent = MainFrame
+UICorner.CornerRadius = UDim.new(0, 20)
+
+-- Agregar un trazo al MainFrame
+UIStroke.Parent = MainFrame
+UIStroke.Thickness = 2
+UIStroke.Color = Color3.fromRGB(105, 105, 105)
+
+-- Propiedades de TitleLabel
+TitleLabel.Name = "TitleLabel"
+TitleLabel.Parent = MainFrame
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.Position = UDim2.new(0.05, 0, 0.05, 0)
+TitleLabel.Size = UDim2.new(0.9, 0, 0.1, 0)
+TitleLabel.Font = Enum.Font.GothamBold
+TitleLabel.Text = "ITz_48-sultan"
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleLabel.TextSize = 24
+TitleLabel.TextWrapped = true
+
+-- Propiedades de ScriptBox
+ScriptBox.Name = "ScriptBox"
+ScriptBox.Parent = MainFrame
+ScriptBox.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+ScriptBox.Position = UDim2.new(0.05, 0, 0.2, 0)
+ScriptBox.Size = UDim2.new(0.9, 0, 0.6, 0)
+ScriptBox.Font = Enum.Font.Code
+ScriptBox.Text = "حط سكربتك هنا :)"
+ScriptBox.TextColor3 = Color3.fromRGB(200, 200, 200)
+ScriptBox.TextSize = 14
+ScriptBox.TextWrapped = true
+ScriptBox.ClearTextOnFocus = true
+ScriptBox.TextXAlignment = Enum.TextXAlignment.Left
+ScriptBox.TextYAlignment = Enum.TextYAlignment.Top
+
+-- Agregar bordes redondeados al ScriptBox
+local ScriptBoxCorner = Instance.new("UICorner", ScriptBox)
+ScriptBoxCorner.CornerRadius = UDim.new(0, 20)
+
+-- Propiedades de ExecuteButton
+ExecuteButton.Name = "ExecuteButton"
+ExecuteButton.Parent = MainFrame
+ExecuteButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+ExecuteButton.Position = UDim2.new(0.3, 0, 0.85, 0)
+ExecuteButton.Size = UDim2.new(0.4, 0, 0.1, 0)
+ExecuteButton.Font = Enum.Font.GothamBold
+ExecuteButton.Text = "تشغيل"
+ExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExecuteButton.TextSize = 16
+
+-- Agregar bordes redondeados al ExecuteButton
+local ExecuteButtonCorner = Instance.new("UICorner", ExecuteButton)
+ExecuteButtonCorner.CornerRadius = UDim.new(0, 20)
+
+-- Acción al hacer clic en el botón de ejecutar
+ExecuteButton.MouseButton1Click:Connect(function()
+    local scriptText = ScriptBox.Text
+    -- Intenta ejecutar el script
+    local success, err = pcall(function()
+        loadstring(scriptText)()
+    end)
+
+    -- Si ocurre un error, mostrarlo en la consola
+    if not success then
+        warn("Error al ejecutar el script: " .. tostring(err))
+    end
+end)
+
+-- Propiedades de CloseButton
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = MainFrame
+CloseButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+CloseButton.Position = UDim2.new(0.9, -30, 0.05, 0)
+CloseButton.Size = UDim2.new(0, 35, 0, 35)
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.TextSize = 14
+
+-- Agregar bordes redondeados al CloseButton
+local CloseButtonCorner = Instance.new("UICorner", CloseButton)
+CloseButtonCorner.CornerRadius = UDim.new(0, 20)
+
+-- Acción al hacer clic en el botón de cerrar
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy() -- Cierra la GUI eliminándola
+end)
+
+-- Animación de apertura del MainFrame (desde el centro hacia todos los lados)
+local tweenInfo = TweenInfo.new(1.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
+local expandTween = TweenService:Create(MainFrame, tweenInfo, {
+    Size = UDim2.new(0, 400, 0, 250),
+    Position = UDim2.new(0.5, 0, 0.5, 0)
+})
+
+expandTween:Play()
+end)
+
+Section:NewButton("VR7-", "", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/VR7ss/OMK/refs/heads/main/VR7-ON-TOP"))()
+end)
+
+Section:NewButton("sYsTem-bRokEn", "", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script"))()
+end)
+
+Section:NewButton("1st -1", "", function()
+    loadstring(game:HttpGet("https://gist.githubusercontent.com/amroffaads/54277157b77455d610973ec3756a22aa/raw/28fea5aa42ed1e58b999707fc08aacf61945d91e/1st"))()
+end)
+
+Section:NewButton("1st -2", "", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/fscript4u/script1stbyamroand787/refs/heads/main/1st%200.7"))()
+end)
+
+Section:NewButton("Tvon", "", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SnoobG/Lua-Script-s/refs/heads/main/Tvon"))()
+end)
+
+local Tab = Window:NewTab("Admins ")
+local Section = Tab:NewSection("Admins-Scripts")
+
+Section:NewButton("IY", "", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+end)
+
+Section:NewButton("Nameless v1", "", function()
+    loadstring(game:HttpGet("https://github.com/FilteringEnabled/NamelessAdmin/blob/main/Source?raw=true"))()
+end)
+
+Section:NewButton("Nameless v2", "", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"))()
 end)
