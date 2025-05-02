@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("كلزق", "GrapeTheme")
+local Window = Library.CreateLib("AMB-Clan", "GrapeTheme")
 local Tab = Window:NewTab("Main ")
 local Section = Tab:NewSection("شاليه محمد ")
 
