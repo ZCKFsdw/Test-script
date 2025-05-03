@@ -1,7 +1,11 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("احم احم", "GrapeTheme")
+local Window = Library.CreateLib("اذا استخدمن هاذا السكربت فأنت مجنون وقليل ادب", "Sentinel")
 local Tab = Window:NewTab("Main ")
 local Section = Tab:NewSection("شاليه محمد ")
+
+Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F, function()   --Keybind toggle GUI
+	Library:ToggleUI()
+end)
 
 Section:NewButton("شغل هاذا اول ", "", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script"))()
@@ -549,7 +553,12 @@ Section:NewButton("CrossHair", "", function()
         _G.CrosshairTransparency = 0.15
     end
 end)
-Section:NewButton("Normale Aimbot", "", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Aimbot-V2/main/Resources/Scripts/Aimbot%20V2%20GUI.lua"))()
+
+Section:NewButton("Normale Aimbot", "", function()   --aimbot section
+    loadstring(game:HttpGet("https://pastebin.com/raw/78fzeUaS"))()
 end)
-	
+
+local Tab = Window:NewTab("? ")
+local Section = Tab:NewSection("?")
+Section:NewButton("?", "", function()   --aimbot section
+end)
