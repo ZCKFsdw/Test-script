@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Private", "Sentinel")
+local Window = Library.CreateLib("Priv-", "Midnight")
 local Tab = Window:NewTab("Main ")
 local Section = Tab:NewSection("شاليه محمد ")
 
@@ -441,7 +441,8 @@ Section:NewButton("VR7-", "", function()
 end)
 
 Section:NewButton("sYsTem-bRokEn", "", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ZCKFsdw/Test-script/refs/heads/main/sb%20%D9%85%D8%B9%D8%AF%D9%84%20%20%20/sb%20%D9%85%D8%B9%D8%AF%D9%84"))()
+
 end)
 
 Section:NewButton("1st -1", "", function()
