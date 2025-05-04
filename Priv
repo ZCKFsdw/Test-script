@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("اذا استخدمن هاذا السكربت فأنت مجنون وقليل ادب", "Sentinel")
+local Window = Library.CreateLib("PrivVVvVvVvVvVvVvVVvVVVVvvVvvVVVVVVvvVvVVvvVvvvVvvVvvvVvvvv", "Sentinel")
 local Tab = Window:NewTab("Main ")
 local Section = Tab:NewSection("شاليه محمد ")
 
