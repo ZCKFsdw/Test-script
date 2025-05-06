@@ -97,4 +97,3 @@ XDDDDDD = hookmetamethod(game, "__index", newcclosure(function(self, key)
 	end
 	return XDDDDDD(self, key)
 end))
-end)
