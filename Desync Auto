@@ -27,4 +27,3 @@ while true do
    end
    Heartbeat:wait()
 end
-	end)
