@@ -1,0 +1,142 @@
+-- This anticheat may get bypassed but most exploiters are skids so you don't have to worry that much.
+
+local Players = game:GetService("Players")
+
+-- Settings --
+
+local ANTICHEAT_NAME = "Anti Cheat System" -- The name of the anticheat
+
+local ANTICHEAT_WHITELIST = {game.CreatorId, "7364207602","8089053929"} -- Disables anticheat for specific users.
+
+local ENABLE_SPEED_DETECTION = true -- When this is enabled players will be punished for going too fast
+
+local ENABLE_FLY_DETECTION = true -- When this is enabled players will be punished for being in the air for too long
+
+local MAX_SPEED = 25 -- How fast a player can go before they get flagged (Useless if ENABLE_SPEED_DETECTION is set to false)
+
+local MAX_AIR_TIME = 3 -- How much time a player can stay in the air for before they get flagged (Useless if ENABLE_FLY_DETECTION is set to false)
+
+local ENABLE_BANNING = true -- Enables serverbanning which is triggered when a user flags the anticheat too many times
+
+local ANNOUNCE_BANS = true -- Creates an announcement when someone gets serverbanned (Only works if ENABLE_BANNING is set to true)
+
+local MAX_FLAGS_BEFORE_BAN = 15 -- How many times a player can trigger the anticheat before they get banned (Useless if ENABLE_BANNING is set to false)
+
+local SPEEDHACK_BAN_MESSAGE = "You have been serverbanned by the "..ANTICHEAT_NAME.." for speed hacking." -- Ban message when you're speed hacking (Useless if ENABLE_BANNING is set to false)
+
+local FLYHACK_BAN_MESSAGE = "You have been serverbanned by the "..ANTICHEAT_NAME.." for fly hacking." -- Ban message when you're fly hacking (Useless if ENABLE_BANNING is set to false)
+
+local ATTEMPTED_REJOIN_KICK_MESSAGE = "You are currently banned from this server." -- Kick message when you attempt to rejoin while you're serverbanned (Useless if ENABLE_BANNING is set to false)
+
+local BAN_ANNOUNCEMENT_TEXT = "has been serverbanned by the "..ANTICHEAT_NAME.." for exploiting." -- Text for the announcement message when someone gets banned. The player's username will be shown before the custom text. (Useless if both ENABLE_BANNING and ANNOUNCE_BANS is set to false)
+
+-- Rest of the code, do not touch unless you know what you're doing. --
+
+local function TouchingFloor(root)
+	local params = RaycastParams.new()
+	params.FilterType = Enum.RaycastFilterType.Exclude
+	params.FilterDescendantsInstances = {root.Parent}
+
+	local raycastTouchingFloor = false
+	for x= -1, 1 do
+		local origin = root.Position + Vector3.new(x, 0, 0)
+		local raycast = workspace:Raycast(root.Position, Vector3.new(0, -3.5, 0), params)
+		if raycast and raycast.Instance then
+			raycastTouchingFloor = true
+		end
+	end
+
+	return raycastTouchingFloor
+end
+
+Players.PlayerAdded:Connect(function(player)
+	player.CharacterAdded:Connect(function(character)
+		task.wait()
+		local bannedPlayers = {}
+		local root = character:WaitForChild("HumanoidRootPart")
+		local lastTime = tick()
+		local lastTouchedFloor = tick()
+		local lastGoodPosition = root.CFrame
+		local flags = 0
+
+		if table.find(bannedPlayers, player.UserId) then
+			player:Kick(ATTEMPTED_REJOIN_KICK_MESSAGE)
+		end
+
+		local flyHacking
+		local speedHacking
+
+		task.spawn(function()
+			while character.Parent do
+				task.wait()
+				local raycastTouchingFloor = TouchingFloor(root)
+				if raycastTouchingFloor or character.Humanoid.FloorMaterial ~= Enum.Material.Air then
+					lastTouchedFloor = tick()
+				end
+
+				local timeSinceFloor = tick() - lastTouchedFloor
+
+				flyHacking = timeSinceFloor > MAX_AIR_TIME
+				if flyHacking then
+					if not table.find(ANTICHEAT_WHITELIST, player.UserId) then
+						if ENABLE_FLY_DETECTION == true then
+							character:PivotTo(lastGoodPosition)
+							flags = flags + 1
+							if flags > MAX_FLAGS_BEFORE_BAN then
+								if ENABLE_BANNING == true then
+									table.insert(bannedPlayers, player.UserId)
+									player:Kick(FLYHACK_BAN_MESSAGE)
+									if ANNOUNCE_BANS == true then
+										if not game.Workspace:FindFirstChild("banAnnouncement") then
+											local banAnnouncement = Instance.new("Hint")
+											banAnnouncement.Name = "banAnnouncement"
+											banAnnouncement.Text = player.Name.. " " ..BAN_ANNOUNCEMENT_TEXT
+											banAnnouncement.Parent = game.Workspace
+											wait(8)
+											banAnnouncement:Destroy()
+										end
+									end
+								end
+							end
+						end
+					end
+				else
+					if not speedHacking then
+						if raycastTouchingFloor and timeSinceFloor < 0.1 then
+							lastGoodPosition = root.CFrame
+						end
+					end
+				end
+			end
+		end)
+
+		character.Humanoid.Running:Connect(function(speed)
+			speedHacking = speed > MAX_SPEED
+
+			if speedHacking then
+				if not table.find(ANTICHEAT_WHITELIST, player.UserId) then
+					if ENABLE_SPEED_DETECTION == true then
+						character:PivotTo(lastGoodPosition)
+						flags = flags + 1
+						if flags > MAX_FLAGS_BEFORE_BAN then
+							if ENABLE_BANNING == true then
+								table.insert(bannedPlayers, player.UserId)
+								player:Kick(SPEEDHACK_BAN_MESSAGE)
+								if ANNOUNCE_BANS == true then
+									if not game.Workspace:FindFirstChild("banAnnouncement") then
+										local banAnnouncement = Instance.new("Hint")
+										banAnnouncement.Name = "banAnnouncement"
+										banAnnouncement.Text = player.Name.. " " ..BAN_ANNOUNCEMENT_TEXT
+										banAnnouncement.Parent = game.Workspace
+										wait(8)
+										banAnnouncement:Destroy()
+									end
+								end
+							end
+						end
+					end
+				end
+			end
+		end)
+	end)
+end)
