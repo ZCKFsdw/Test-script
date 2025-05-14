@@ -1,1 +1,17 @@
 
+
+
+
+
+
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("  حسابي --> (8821s) تعال دسكورد  السكربت مسكر ", "Synapse")
+local Tab = Window:NewTab("Main ")
+local Section = Tab:NewSection("شاليه محمد ")
+
+
+
+Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F, function()   --Keybind toggle GUI
+	Library:ToggleUI()
+end)
